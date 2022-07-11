@@ -1,0 +1,6 @@
+
+access_token="1069560680125214721-FoNSlFauNu1hsr2FZjhV8an8m1NvKE"
+access_token_secret="GcAezFonjjpb09gizxK0Y6lJLIvcVEMHGxb2NijT3e0hh"
+consumer_key="lh9TqqvESU9DWjfnXZJI744fp"
+consumer_secret="0HwPCEk3oAiGYtnbD5pbnWz5me8KLHFYQxP0mBPLWKWBryzVBV"
+bearer='AAAAAAAAAAAAAAAAAAAAAOTZegEAAAAA8wXbuTfxbYGAs9PPLfXaIiyvAQI%3DOPdZwQKvuifTMaJlaY3YboCoC6AMRvnhYRGykoZF9Ulzc1dd7F'
