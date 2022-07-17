@@ -6,3 +6,4 @@ pandocfilters==1.5.0
 dataframe-image==0.1.1
 tweepy==4.10.0
 pytz>=2013b
+webdriver-manager==3.8.0
