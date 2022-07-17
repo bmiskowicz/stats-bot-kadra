@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 
+import time
 import numpy as np
 import pandas as pd
 import dataframe_image as dfi
@@ -336,26 +337,29 @@ def on_tweet(tweet):
         os.remove(nameB)
 
 
+while(True):
+    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+    auth.set_access_token(access_token, access_token_secret)
+    API = tweepy.API(auth)
 
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-auth.set_access_token(access_token, access_token_secret)
-API = tweepy.API(auth)
+    with open('time.txt') as f:
+        text = f.readlines()
+        date = datetime.strptime((str(text[0])[:19]), '%Y-%m-%d %H:%M:%S')
+        date = pytz.utc.localize(date)
 
-with open('time.txt') as f:
-    text = f.readlines()
-    date = datetime.strptime((str(text[0])[:19]), '%Y-%m-%d %H:%M:%S')
-    date = pytz.utc.localize(date)
+    with open('time.txt', 'w') as file:
+        file.write(str(datetime.now()))
 
-with open('time.txt', 'w') as file:
-    file.write(str(datetime.now()))
-
-tweets = tweepy.Cursor(API.search_tweets, q='@staty_kadra')
-if tweets is not None:
-    for tweet in tweets.pages():
-        for i in tweet:
-            if (i.created_at + timedelta(hours=2) > date):
-                while 1:
-                    try:
-                        on_tweet(i)
-                        break
-                    except: print("ajajaj")
+    tweets = tweepy.Cursor(API.search_tweets, q='@staty_kadra')
+    if tweets is not None:
+        for tweet in tweets.pages():
+            for i in tweet:
+                if (i.created_at + timedelta(hours=2) > date):
+                    while 1:
+                        try:
+                            on_tweet(i)
+                            break
+                        except:
+                            break
+                        
+    time.sleep(300)
