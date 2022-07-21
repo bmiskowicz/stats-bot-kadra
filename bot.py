@@ -20,8 +20,7 @@ def fetch(match, set):
     #op = webdriver.ChromeOptions()
     #op.add_argument('headless')
     #driver = webdriver.Chrome(executable_path=r'C:\\ProgramData\\chocolatey\\bin\\chromedriver.exe', options=op)
-    #driver = webdriver.Chrome(executable_path=r'C:\\ProgramData\\chocolatey\\bin\\chromedriver.exe')
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    driver = webdriver.Chrome(executable_path=r'C:\\ProgramData\\chocolatey\\bin\\chromedriver.exe')
 
 
     driver.get(link)
@@ -72,21 +71,21 @@ def fetch(match, set):
     for player in range(graczyA):
         pom2 = player*9
         numbersA[player] = (web_element[pom2].get_attribute("textContent"))
-        playersA[player] = (web_element[1 + pom2].get_attribute("textContent")).encode()
-        posA[player] = (web_element[2 + pom2].get_attribute("textContent")).encode()
+        playersA[player] = (web_element[1 + pom2].get_attribute("textContent")).encode('ascii', 'ignore').decode('utf-8')
+        posA[player] = (web_element[2 + pom2].get_attribute("textContent")).encode('ascii', 'ignore').decode('utf-8')
         teamA[player, 0] = (web_element[3 + pom2].get_attribute("textContent"))
 
 
     for player in range(graczyB):
         pom2 = player*9
         numbersB[player] = (web_element[startB + pom2].get_attribute("textContent"))
-        playersB[player] = (web_element[startB + 1 + pom2].get_attribute("textContent")).encode()
-        posB[player] = (web_element[startB + 2 + pom2].get_attribute("textContent")).encode()
+        playersB[player] = (web_element[startB + 1 + pom2].get_attribute("textContent")).encode('ascii', 'ignore').decode('utf-8')
+        posB[player] = (web_element[startB + 2 + pom2].get_attribute("textContent")).encode('ascii', 'ignore').decode('utf-8')
         teamB[player, 0] = (web_element[startB + 3 + pom2].get_attribute("textContent"))
 
 
-    posA = np.char.decode(posA, encoding='ascii', errors='ignore')
-    posB = np.char.decode(posB, encoding='ascii',  errors='ignore')
+    posA = np.char.decode(posA, encoding="utf-8", errors='ignore')
+    posB = np.char.decode(posB, encoding="utf-8",  errors='ignore')
     playersA[graczyA] = " "
     playersB[graczyB] = " "
     posA[graczyA] = " "
@@ -94,8 +93,8 @@ def fetch(match, set):
     numbersA[graczyA] = 0
     numbersB[graczyB] = 0
     
-    playersA = np.char.decode(playersA, encoding=None, errors=None)
-    playersB = np.char.decode(playersB, encoding=None, errors=None)
+    playersA = np.char.decode(playersA, encoding="utf-8", errors='ignore')
+    playersB = np.char.decode(playersB, encoding="utf-8", errors='ignore')
     playersA[graczyA] = "lacznie"
     playersB[graczyB] = "lacznie"
 
@@ -366,4 +365,4 @@ while(True):
                         except:
                             break
                         
-    time.sleep(300)
+    time.sleep(200)
