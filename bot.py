@@ -341,11 +341,15 @@ def on_tweet(tweet):
         #getting the tweet author
         username = tweet.author.screen_name
 
+        #.png files names
+        nameA = words[1] + '_' + words[2] + '_' + 'A.png'
+        nameB = words[1] + '_' + words[2] + '_' + 'B.png'
+
         #fetching the data based on tweet
         name1, name2 = fetch(words[1], words[2])
 
         #getting the images so as to attatch them to respond on twitter
-        filenames = [name1, name2]
+        filenames = [nameA, nameB]
         media_ids = []
 
         for filename in filenames:
@@ -361,8 +365,8 @@ def on_tweet(tweet):
         API.update_status(status = comment, media_ids = media_ids, in_reply_to_status_id = tweet.id , auto_populate_reply_metadata=True)
         
         #removing the files from server so as to save space on server
-        os.remove(name1)
-        os.remove(name2)
+        os.remove(nameA)
+        os.remove(nameB)
 
 
 while(True):
@@ -389,7 +393,7 @@ while(True):
         for tweet in tweets.pages():
             for i in tweet:
                 #checking if tweet was created after last search
-                if (i.created_at + timedelta(hours=2) > date):
+                if (i.created_at + timedelta(hours=2) >= date):
                     #trying to scrap the statistics
                     try:
                         on_tweet(i)
