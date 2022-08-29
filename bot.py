@@ -29,7 +29,7 @@ def fetch(match, set):
 
     #opening the link in the browser
     driver.get(link)
-
+    time.sleep(5)
     #getting the first name from second team
     playerOneB = driver.find_element(By.XPATH, '//table[@data-team="teamb" and @data-set="' + set + '"]//td[@class="vbw-o-table__cell playername"]')
     playerOneB = playerOneB.get_attribute("textContent")
